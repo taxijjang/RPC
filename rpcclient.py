@@ -1,6 +1,6 @@
 import xmlrpc.client
 
-s = xmlrpc.client.ServerProxy('http://localhost:8000')
+s = xmlrpc.client.ServerProxy('http://localhost:8888')
 
 print(s.pow(2,3))
 print(s.add(2,3))

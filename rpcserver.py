@@ -5,7 +5,7 @@ class RequestHandler(SimpleXMLRPCRequestHandler):
     rpc_paths = ('/RPC2',)
 
 
-with SimpleXMLRPCServer(('localhost',8000),
+with SimpleXMLRPCServer(('localhost',8888),
                         requestHandler=RequestHandler)as server:
     server.register_introspection_functions()
 
