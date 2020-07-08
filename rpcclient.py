@@ -1,8 +1,17 @@
-import xmlrpc.client
 
-s = xmlrpc.client.ServerProxy('http://localhost:8888')
+from xmlrpc.server import SimpleXMLRPCServer
+from xmlrpc.server import SimpleXMLRPCRequestHandler
+import os
 
-print(s.pow(2,3))
-print(s.add(2,3))
-print(s.mul(2,3))
-print(s.pow(2,3))
+
+class RequestHandler(SimpleXMLRPCRequestHandler):
+    rpc_paths = ('/RPC2',)
+
+
+with SimpleXMLRPCServer(('localhost',8000),
+                        requestHandler=RequestHandler)as server:
+    server.register_introspection_functions()
+
+
+
+    server.serve_forever()

@@ -5,21 +5,13 @@ class RequestHandler(SimpleXMLRPCRequestHandler):
     rpc_paths = ('/RPC2',)
 
 
-with SimpleXMLRPCServer(('localhost',8888),
+with SimpleXMLRPCServer(('0.0.0.0',9000),
                         requestHandler=RequestHandler)as server:
     server.register_introspection_functions()
 
-    server.register_function(pow)
+    def message(request):
+        print("response {}".format(request))
+        return "response {}".format(request)
 
-    def adder_function(x,y):
-        return x+y
-
-    server.register_function(adder_function, 'add')
-
-    class MyFuncs:
-        def mul(self,x,y):
-            return x+y
-
-    server.register_instance(MyFuncs())
-
+    server.register_function(message,'message')
     server.serve_forever()
